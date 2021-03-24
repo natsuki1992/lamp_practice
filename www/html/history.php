@@ -14,6 +14,8 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 if($user['type'] === USER_TYPE_ADMIN) {
-    redirect_to('/history_admin.php');
+    $historys = get_all_historys($db);
+} else {
+    $historys = get_type_history($db, $user['user_id']);
 }
-redirect_to('/history_index.php');
+include_once VIEW_PATH . '/history_view.php';
