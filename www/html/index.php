@@ -13,6 +13,18 @@ if(is_logined() === false){
 $db = get_db_connect();
 $user = get_login_user($db);
 $token = get_csrf_token();
-$items = get_open_items($db);
+$pull_down_item = form_get('pull_down_item');
+
+if(isset($pull_down_item)){
+  if($pull_down_item === 'cheap_price'){
+    $items = get_open_cheap_price_items($db);
+  } else if($pull_down_item === 'high_price'){
+    $items = get_open_high_price_items($db);
+  } else if($pull_down_item === 'new_items'){
+    $items = get_open_items($db);
+  }
+} else {
+  $items = get_open_items($db);
+}
 
 include_once VIEW_PATH . 'index_view.php';
