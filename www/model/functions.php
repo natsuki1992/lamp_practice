@@ -24,6 +24,12 @@ function get_post($name){
   return '';
 }
 
+function form_get($name){
+  if(isset($_GET[$name]) === true){
+    return $_GET[$name];
+  }
+}
+
 function get_file($name){
   if(isset($_FILES[$name]) === true){
     return $_FILES[$name];

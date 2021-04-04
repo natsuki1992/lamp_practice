@@ -30,6 +30,29 @@ function get_items($db, $is_open = false){
       stock,
       price,
       image,
+      status,
+      created
+    FROM
+      items
+  ';
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+      ORDER BY created desc
+    ';
+  }
+
+  return fetch_all_query($db, $sql);
+}
+
+function get_cheap_price_items($db, $is_open = false){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
       status
     FROM
       items
@@ -37,6 +60,29 @@ function get_items($db, $is_open = false){
   if($is_open === true){
     $sql .= '
       WHERE status = 1
+      ORDER BY price
+    ';
+  }
+
+  return fetch_all_query($db, $sql);
+}
+
+function get_high_price_items($db, $is_open = false){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status
+    FROM
+      items
+  ';
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+      ORDER BY price desc
     ';
   }
 
@@ -45,6 +91,14 @@ function get_items($db, $is_open = false){
 
 function get_all_items($db){
   return get_items($db);
+}
+
+function get_open_cheap_price_items($db){
+  return get_cheap_price_items($db, true);
+}
+
+function get_open_high_price_items($db){
+  return get_high_price_items($db, true);
 }
 
 function get_open_items($db){
