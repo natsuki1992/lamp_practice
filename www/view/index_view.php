@@ -15,10 +15,9 @@
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
     <form method="get" name="pull_down" action="index.php">
       <select id="pull_down_menu" name="pull_down_item">
-        <option value="not_select" selected>並び替え</option>
-        <option value="new_items">新着順</option>
-        <option value="cheap_price">価格の安い順</option>
-        <option value="high_price">価格の高い順</option>
+        <option value="new_items" <?php if($pull_down_item === "new_items")print "selected"?>>新着順</option>
+        <option value="cheap_price" <?php if($pull_down_item === "cheap_price")print "selected"?>>価格の安い順</option>
+        <option value="high_price" <?php if($pull_down_item === "high_price")print "selected"?>>価格の高い順</option>
       </select>
     </form>
 
